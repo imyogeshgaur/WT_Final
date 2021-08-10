@@ -1,0 +1,55 @@
+package JavaTree;
+
+public class largestElement {
+    public static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        public Node(int data) {
+            this.data = data;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    public Node root;
+
+    public void LargestNode() {
+        root = null;
+    }
+
+    public int largest(Node temp) {
+        if (root == null) {
+            System.out.println("Tree is empty");
+            return 0;
+        } else {
+            int leftMax, rightMax;
+            int max = temp.data;
+
+            if (temp.left != null) {
+                leftMax = largest(temp.left);
+                max = Math.max(max, leftMax);
+            }
+
+            if (temp.right != null) {
+                rightMax = largest(temp.right);
+                max = Math.max(max, rightMax);
+            }
+            return max;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        largestElement bt = new largestElement();
+        bt.root = new Node(15);
+        bt.root.left = new Node(20);
+        bt.root.right = new Node(35);
+        bt.root.left.left = new Node(74);
+        bt.root.right.left = new Node(55);
+        bt.root.right.right = new Node(6);
+
+        System.out.println("Largest element in the binary tree: " + bt.largest(bt.root));
+    }
+}
